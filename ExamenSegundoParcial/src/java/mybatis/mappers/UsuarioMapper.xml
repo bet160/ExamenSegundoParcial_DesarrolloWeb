@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtdmybatis-3-mapper.dtd">
+
+<mapper namespace="Usuario">
+    <select id="loginUsuario" resultType="pojos.Usuario" parameterType="pojos.Usuario">
+        SELECT
+        usuario.idUsuario,
+        usuario.nombre,
+        usuario.apellidoPaterno,
+        usuario.apellidoMaterno,
+        usuario.Celular,
+        usuario.fechaNacimiento,
+        usuario.password
+        FROM usuario WHERE usuario.celular = #{celular} and usuario.password = #{password}
+    </select> 
+    
+     <select id="validarExistencia" resultType="pojos.Usuario" parameterType="string">
+        SELECT
+        usuario.idUsuario,
+        usuario.nombre,
+        usuario.apellidoPaterno,
+        usuario.apellidoMaterno,
+        usuario.celular,
+        usuario.fechaNacimiento,
+        usuario.password
+        FROM usuario WHERE usuario.celular = #{celular}
+    </select>  
+    
+    <insert id="registrarUsuario" parameterType="pojos.Usuario">
+        INSERT INTO usuario (nombre,apellidoPaterno,apellidoMaterno,celular,fechaNacimiento,password)
+        VALUES(#{nombre},#{apellidoPaterno},#{apellidoMaterno},#{celular},#{fechaNacimiento},#{password})        
+    </insert>
+    
+</mapper>
